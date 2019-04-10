@@ -94,8 +94,5 @@ EXPECTED;
      *
      * @return Query
      */
-    private function newQuery()
-    {
-        return TableRegistry::get('panels')->query();
-    }
+    
 }

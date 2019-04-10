@@ -98,29 +98,5 @@ class ComposerController extends Controller
      * @param ArrayInput $input An array describing the command input
      * @return BufferedOutput Aa Console command buffered result
      */
-    private function executeComposerCommand(ArrayInput $input)
-    {
-        $bin = implode(DIRECTORY_SEPARATOR, [ROOT, 'vendor', 'bin', 'composer']);
-        putenv('COMPOSER_HOME=' . $bin);
-        putenv('COMPOSER_CACHE_DIR=' . CACHE);
-
-        $dir = getcwd();
-        chdir(ROOT);
-        $timeLimit = ini_get('max_execution_time');
-        set_time_limit(300);
-        $memoryLimit = ini_get('memory_limit');
-        ini_set('memory_limit', '512M');
-
-        $output = new BufferedOutput();
-        $application = new Application();
-        $application->setAutoExit(false);
-        $application->run($input, $output);
-
-        // Restore environment
-        chdir($dir);
-        set_time_limit($timeLimit);
-        ini_set('memory_limit', $memoryLimit);
-
-        return $output;
-    }
+    
 }
